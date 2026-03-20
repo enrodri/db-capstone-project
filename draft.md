@@ -30,44 +30,22 @@ This repository contains the complete database solution for Little Lemon, a fict
 ## 🏗️ Database Schema
 The database is designed in **3rd Normal Form (3NF)** to ensure zero data redundancy and high referential integrity.
 
-### Core Tables
-| Table | Primary Key | Description |
+### Core Components
+| Objective | Table(s) | Description |
 | :--- | :--- | :--- |
-| **Orders** | `OrderID` | Tracks transactions and total bill amounts. |
-| **CustomerDetails** | `CustomerID` | Stores PII including names and contact info. |
-| **Bookings** | `BookingID` | Manages table reservations and schedules. |
-| **OderItems** | `OrderItemID` | Links all requested menu items with their corresponding orders. |
-| **MenuItem** | `MenuItemID` | Contains individual dish names and prices. |
-| **OrderDeliveryStatus** | `DeliveryID` | Contains all the takeaway requests. |
-| **Staff** | `StaffID` | Stores staff info. |
-
----
-
-## ⚙️ Stored Procedures & Logic
-The system implements professional-grade logic to handle restaurant operations.
-
-### 1. Administrative Procedures (CRUD)
-| Procedure | Parameters | Purpose |
-| :--- | :--- | :--- |
-| `AddBooking` | ID, Date, Table, etc. | Validates customer existence before inserting a new booking. |
-| `UpdateBooking` | ID, Date | Updates the schedule for an existing reservation. |
-| `CancelBooking` | ID | Removes a reservation record from the system. |
-| `CancelOrder` | ID | Deletes an order record based on user input. |
-
-### 2. Advanced Transactional Logic
-* **`AddValidBooking`**: Utilizing `START TRANSACTION` and `ROLLBACK`, this procedure ensures **ACID compliance**. it checks if a table is already claimed on a specific date before committing a new entry, preventing double-bookings.
-* **`CheckBooking`**: A diagnostic tool to verify table availability instantly.
-
-### 3. Analytics & Optimization
-* **`GetMaxQuantity`**: A high-performance query to identify the largest single-item order.
-* **`PopulateOrders` / `PopulateBookings`**: Custom scripts designed to seed the database with synthetic data for testing.
+| **Transactional** | `Orders` and `OrderItems` | Track individual records. |
+| **Operational** | `Bookings` and `OrderDeliveryStatus` | Manage reservations and logistics. |
+| **Administrative** | `Staff`, `MenuItems` and `CustomerDetails` | Manage the restaurant's core entities.. |
 
 ---
 
 ## 🐍 Data Automation (Faker Library)
 To simulate a production-ready environment, this project moves beyond static `INSERT` statements:
-* **Faker Integration:** Hundreds of unique records were generated using the **Python Faker library**.
-* **Relationship Mapping:** The Python scripts dynamically map Foreign Keys between customers and orders, ensuring a realistic and interconnected dataset for analysis.
+* **Faker Integration:** Utilized the **Python Faker library** to generate unique customer, staff, and address data.
+ * **Validated Ingestion:** Data is processed through `Populate` stored procedures that include `IF EXISTS` checks and `SIGNAL SQLSTATE` error handling to prevent orphaned records.
+  * **Probabilistic Logic:** The population script simulates real-world variance, such as a **25% takeaway rate** for orders.
+
+> **View the Technical Details:** [🛠️ Data Ingestion & Seeding Documentation](https://www.google.com/search?q=./docs/population.md)
 
 ---
 
@@ -75,3 +53,32 @@ To simulate a production-ready environment, this project moves beyond static `IN
 The final analysis was performed by exporting the normalized SQL data into **Tableau Public**.
 * **Key Visuals:** Sales by category, high-value customer segmentation (orders > $60), and table occupancy trends.
 * **Live Dashboard:** [Insert Your Tableau Public Link Here]
+
+---
+
+## 🚀 Business Logic Layer
+
+The system includes a suite of operational procedures designed to manage day-to-day restaurant functions and provide analytical insights.
+
+  * **Booking Management:** Procedures for checking, adding, updating, and cancelling reservations with built-in conflict detection.
+  * **Sales Analytics:** Dedicated procedures like `GetMaxQuantity` for inventory optimization.
+  * **Python-SQL Bridge:** The `little_lemon_execution.ipynb` notebook demonstrates how these procedures are called programmatically to manage the backend.
+
+> **View the Technical Details:** [🚀 Operational Execution Documentation](https://www.google.com/search?q=./docs/execution.md)
+
+-----
+
+## 📊 Business Intelligence (Tableau)
+
+The final phase involves translating normalized SQL data into interactive insights.
+
+**[🔗 View the Interactive Tableau Dashboard](https://public.tableau.com/app/profile/enyel.a.rodr.guez.g./viz/Littlelemoncapstone/Dashboard)**
+
+-----
+
+## 🛠️ Quick Start
+
+1.  **Schema:** Execute `sql/database_schema.sql` to build the environment.
+2.  **Procedures:** Run the scripts in `docs/population_procedures.sql` and `docs/execution_procedures.sql` to register the stored procedures.
+3.  **Population:** Run `python_client/little_lemon_population.ipynb` to seed the database with synthetic records.
+4.  **Execution:** Use `python_client/little_lemon_execution.ipynb` to test the business logic layer.
