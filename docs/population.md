@@ -16,8 +16,9 @@ All procedures dedicated to data seeding are prefixed with `Populate_`. This cre
 
 ### 1. Core Entity Population
 These procedures handle the "Independent" tables that do not rely on foreign keys.
-* **`Populate_MenuItems`**: Maps menu offerings by category (Cuisine/Course) and stores both **Price** and **Cost** for margin analysis.
+* **`PopulateMenuItems`**: Maps menu offerings by category (Cuisine/Course) and stores both **Price** and **Cost** for margin analysis.
 
+```sql
 CREATE PROCEDURE PopulateMenuItems (
     IN p_Name VARCHAR(255), 
     IN p_Type VARCHAR(255), 
@@ -29,9 +30,11 @@ BEGIN
     INSERT INTO MenuItem (Name, Type, Cuisine, Price, Cost)
     VALUES (p_Name, p_Type, p_Cuisine, p_Price, p_Cost);
 END //
+```
 
-* **`Populate_CustomerDetails`**: Generates unique PII (Personal Identifiable Information) including names and contact strings.
+* **`PopulateCustomerDetails`**: Generates unique PII (Personal Identifiable Information) including names and contact strings.
 
+```sql
 CREATE PROCEDURE PopulateCustomerDetails(
     IN p_FirstName VARCHAR(255),
     IN p_LastName VARCHAR(255),
@@ -42,9 +45,11 @@ BEGIN
     INSERT INTO CustomerDetails (FirstName, LastName, Phone, Email)
     VALUES (p_FirstName, p_LastName, p_Phone, p_Email);
 END //
+```
 
-* **`Populate_Staff`**: Seeds employee roles and salary tiers.
+* **`PopulateStaff`**: Seeds employee roles and salary tiers.
 
+```sql
 CREATE PROCEDURE PopulateStaff(
     IN p_FirstName VARCHAR(255),
     IN p_LastName VARCHAR(255),
@@ -56,14 +61,16 @@ BEGIN
     INSERT INTO Staff (FirstName, LastName, Email, Role, Salary)
     VALUES (p_FirstName, p_LastName, p_Email, p_Role, p_Salary);
 END //
+```
 
 ### 2. Relational & Transactional Seeding
 These procedures include internal validation to prevent "Orphan Records" (data that points to a non-existent parent).
 
-#### **`Populate_Bookings`**
+#### **`PopulateBookings`**
 * **Logic:** Before insertion, the procedure checks `IF EXISTS` for the `CustomerID`.
 * **Integrity:** If a non-existent ID is passed from the Python script, it triggers a `SIGNAL SQLSTATE '45000'`, halting the insertion and preserving data health.
 
+```sql
 CREATE PROCEDURE PopulateBookings(
     IN p_Date DATE,
     IN p_Time TIME,
@@ -79,11 +86,12 @@ BEGIN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Customer ID does not exist.';
     END IF;
 END //
+```
 
-
-#### **`Populate_Orders`**
+#### **`PopulateOrders`**
 * **Logic:** Links a transaction to a Customer, a specific Booking event, and a Staff member.
 
+```sql
 CREATE PROCEDURE PopulateOrders(
     IN p_OrderDate DATE, 
     IN p_CurrentTable INT,
@@ -101,10 +109,12 @@ BEGIN
 		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Customer ID does not exist.';
 	END IF;
 END //
+```
 
-#### **`Populate_DeliveryStatus`**
+#### **`PopulateDeliveryStatus`**
 * **Logic:** Applied to only a subset of orders (simulated **25% takeaway rate** in Python).
 
+```sql
 CREATE PROCEDURE PopulateDeliveryStatus(
     IN p_DeliveryDate DATE, 
     IN p_DeliveryStatus VARCHAR(255), 
@@ -119,6 +129,7 @@ BEGIN
 		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Order ID does not exist.';
 	END IF;
 END //
+```
 
 ---
 
