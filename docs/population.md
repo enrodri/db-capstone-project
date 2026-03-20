@@ -111,6 +111,31 @@ BEGIN
 END //
 ```
 
+### **`PopulateOrderItems`**
+* **Logic:** This procedure acts as the relational bridge between a specific transaction and the menu items purchased. 
+* **Integrity Check:** It utilizes a **Double Existence Check**. It validates that both the `OrderID` (from the parent table) and the `MenuItemID` (from the catalog) exist before allowing the insertion.
+* **Error Handling:** If either ID is missing, it triggers a `SIGNAL SQLSTATE '45000'`. This prevents "orphaned" order items that wouldn't show up correctly in the Tableau dashboard.
+
+```sql
+CREATE PROCEDURE PopulateOrderItems(
+    IN p_OrderID INT,
+    IN p_MenuItemID INT,
+    IN p_Quantity INT
+)
+BEGIN
+    IF EXISTS (SELECT 1 FROM Orders WHERE OrderID = p_OrderID) 
+       AND EXISTS (SELECT 1 FROM MenuItem WHERE MenuItemID = p_MenuItemID) THEN
+       
+        INSERT INTO OrderItems (OrderID, MenuItemID, Quantity)
+        VALUES (p_OrderID, p_MenuItemID, p_Quantity);
+        
+    ELSE
+        SIGNAL SQLSTATE '45000' 
+        SET MESSAGE_TEXT = 'Error: Either OrderID or MenuItemID does not exist.';
+    END IF;
+END //
+```
+
 #### **`PopulateDeliveryStatus`**
 * **Logic:** Applied to only a subset of orders (simulated **25% takeaway rate** in Python).
 
