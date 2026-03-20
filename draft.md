@@ -8,7 +8,7 @@ This repository contains the complete database solution for Little Lemon, a fict
 ## 📂 Project Structure
 ```text
 .
-├── sql_scripts/
+├── sql/
 │   ├── database_schema.sql       # ERD implementation and table creation
 │   ├── stored_procedures.sql     # Administrative and analytic procedures
 │   └── views_and_queries.sql     # Virtual tables and optimized reporting
@@ -33,11 +33,13 @@ The database is designed in **3rd Normal Form (3NF)** to ensure zero data redund
 ### Core Tables
 | Table | Primary Key | Description |
 | :--- | :--- | :--- |
+| **Orders** | `OrderID` | Tracks transactions and total bill amounts. |
 | **CustomerDetails** | `CustomerID` | Stores PII including names and contact info. |
 | **Bookings** | `BookingID` | Manages table reservations and schedules. |
-| **Orders** | `OrderID` | Tracks transactions and total bill amounts. |
-| **MenuItems** | `ItemID` | Contains individual dish names and prices. |
-| **Menu** | `MenuID` | Groups MenuItems into categories (Starters, Main, etc.). |
+| **OderItems** | `OrderItemID` | Links all requested menu items with their corresponding orders. |
+| **MenuItem** | `MenuItemID` | Contains individual dish names and prices. |
+| **OrderDeliveryStatus** | `DeliveryID` | Contains all the takeaway requests. |
+| **Staff** | `StaffID` | Stores staff info. |
 
 ---
 
