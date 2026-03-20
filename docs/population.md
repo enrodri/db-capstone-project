@@ -1,4 +1,4 @@
-# 🍋 Little Lemon: Database Capstone Project
+# 🛠️ Data Ingestion & Synthetic Seeding
 ### Documentation for `Populate` Stored Procedures
 
 To facilitate high-scale testing and Business Intelligence (BI) analysis, a custom data ingestion layer was developed using MySQL Stored Procedures and the Python Faker library. This approach ensures that synthetic data adheres to the same business logic and relational constraints as production data.
