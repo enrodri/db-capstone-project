@@ -13,10 +13,13 @@ This repository contains the complete database solution for Little Lemon, a fict
 │   ├── stored_procedures.sql     # Administrative and analytic procedures
 │   └── views_and_queries.sql     # Virtual tables and optimized reporting
 ├── python_client/
-│   ├── little_lemon_generation.ipynb     # Automated seeding using Faker library
-│   └── little_lemon_queries.ipynb       # SQL-Python bridge for reporting
+│   ├── little_lemon_population.ipynb     # Automated seeding using Faker library
+│   └── little_lemon_execution.ipynb       # SQL-Python bridge for reporting
 ├── diagrams/
-│   ├── database_schema.png    # Entity Relationship Diagram
+│   └── database_schema.png    # ERD snapshot
+├── docs/
+│   ├── population.md    # Stored procedures related to database population based on the faker library
+│   └── execution.md    # Stored procedures related to queries execution and booking management
 ├── data/
 │   └── processed_exports/        # CSV files used for Tableau ingestion
 └── README.md
