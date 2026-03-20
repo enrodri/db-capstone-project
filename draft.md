@@ -66,7 +66,7 @@ The system implements professional-grade logic to handle restaurant operations.
 
 ## 🐍 Data Automation (Faker Library)
 To simulate a production-ready environment, this project moves beyond static `INSERT` statements:
-* **Faker Integration:** Thousands of unique records were generated using the **Python Faker library**.
+* **Faker Integration:** Hundreds of unique records were generated using the **Python Faker library**.
 * **Relationship Mapping:** The Python scripts dynamically map Foreign Keys between customers and orders, ensuring a realistic and interconnected dataset for analysis.
 
 ---
@@ -75,17 +75,3 @@ To simulate a production-ready environment, this project moves beyond static `IN
 The final analysis was performed by exporting the normalized SQL data into **Tableau Public**.
 * **Key Visuals:** Sales by category, high-value customer segmentation (orders > $60), and table occupancy trends.
 * **Live Dashboard:** [Insert Your Tableau Public Link Here]
-
----
-
-### 🎓 Professional Identity
-**[Your Name]**
-*Doctor in Medicine & Surgery | UNAN-León Alumnus*
-*Data Science & Medical Research Specialist*
-
-***
-
-### Pro-Tip for the Repository:
-In your `sql_scripts` folder, make sure the code for the procedures is clean and well-commented. If a recruiter sees that you’ve documented your `IF EXISTS` checks and `TRANSACTION` blocks, it reinforces that "Doctor-level" attention to detail.
-
-**Would you like me to help you write the "Testing the Procedures" section for the README so you can show exactly how to verify your logic?**
