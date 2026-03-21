@@ -49,13 +49,6 @@ To simulate a production-ready environment, this project moves beyond static `IN
 
 ---
 
-## 📊 Business Intelligence (Tableau Public)
-The final analysis was performed by exporting the normalized SQL data into **Tableau Public**.
-* **Key Visuals:** Sales by category, high-value customer segmentation (orders > $60), and table occupancy trends.
-* **Live Dashboard:** [Insert Your Tableau Public Link Here]
-
----
-
 ## 🚀 Business Logic Layer
 
 The system includes a suite of operational procedures designed to manage day-to-day restaurant functions and provide analytical insights.
