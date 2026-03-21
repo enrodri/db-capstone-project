@@ -169,7 +169,7 @@ The data is fed into these procedures via a Jupyter Notebook workflow.
 ---
 
 ## 🛠️ How to Re-Seed the Database
-1. Run the `DROP TABLE` and `CREATE TABLE` scripts to clear the schema.
-2. Execute the `Populate_` SQL scripts to register the procedures.
-3. Run the `little_lemon_population.ipynb` notebook.
-4. Refresh the Tableau Data Source.
+1. Run the `DROP TABLE` statement to clear the schema.
+2. Run the `little_lemon` workbench file to forward engineer the schema.
+3. Execute the `Population_procedures` SQL scripts to register the procedures.
+4. Run the `little_lemon_population.ipynb` notebook.
