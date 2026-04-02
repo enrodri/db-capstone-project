@@ -6,7 +6,7 @@ To facilitate high-scale testing and Business Intelligence (BI) analysis, a cust
 ---
 
 ## 🏗️ Design Strategy: The "Populate" Prefix
-All procedures dedicated to data seeding are prefixed with `Populate_`. This creates a clear distinction between:
+All procedures dedicated to data seeding are prefixed with `Populate`. This creates a clear distinction between:
 * **Application Logic:** (e.g., `AddValidBooking`) – Handles real-time user interactions.
 * **Seeding Logic:** (e.g., `PopulateOrders`) – Optimized for batch processing and testing.
 
