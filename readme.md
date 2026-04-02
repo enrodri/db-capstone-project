@@ -45,7 +45,7 @@ To simulate a production-ready environment, this project moves beyond static `IN
  * **Validated Ingestion:** Data is processed through `Populate` stored procedures that include `IF EXISTS` checks and `SIGNAL SQLSTATE` error handling to prevent orphaned records.
   * **Probabilistic Logic:** The population script simulates real-world variance, such as a **25% takeaway rate** for orders.
 
-> **View the Technical Details:** [🛠️ Data Ingestion & Seeding Documentation](https://www.google.com/search?q=./docs/population.md)
+> **View the Technical Details:** [🛠️ Data Ingestion & Seeding Documentation](https://github.com/enrodri/db-capstone-project/blob/main/docs/population.md)
 
 ---
 
@@ -57,7 +57,7 @@ The system includes a suite of operational procedures designed to manage day-to-
   * **Sales Analytics:** Dedicated procedures like `GetMaxQuantity` for inventory optimization.
   * **Python-SQL Bridge:** The `little_lemon_execution.ipynb` notebook demonstrates how these procedures are called programmatically to manage the backend.
 
-> **View the Technical Details:** [🚀 Operational Execution Documentation](https://www.google.com/search?q=./docs/execution.md)
+> **View the Technical Details:** [🚀 Operational Execution Documentation](https://github.com/enrodri/db-capstone-project/blob/main/docs/execution.md)
 
 -----
 
